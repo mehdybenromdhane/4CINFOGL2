@@ -7,15 +7,17 @@
 
 
 
-<div class="d-flex p-5">
+<div class="d-flex p-5 flex-wrap">
 
 {% for e in list %}
 <div class="card m-2"  style="width: 18rem;">
     <img src="{{e.image.url}}" class="card-img-top" alt="...">
     <div class="card-body">
+
+
       <h5 class="card-title">{{e.title}}</h5>
       <p class="card-text">{{e.description}}</p>
-      <a href="#" class="btn btn-primary">Details</a>
+      <a href="{% url 'detailsClass' e.id %}" class="btn btn-primary">Details</a>
     </div>
   </div>
 

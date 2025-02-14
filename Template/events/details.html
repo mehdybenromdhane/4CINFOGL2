@@ -1,0 +1,26 @@
+{% extends 'index.html' %}
+
+
+
+{% block content %}
+
+
+
+
+<div class="d-flex p-5">
+
+
+<div class="card m-2"  style="width: 18rem;">
+    <img src="{{event.image.url}}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{event.title}}</h5>
+      <p class="card-text">{{event.description}}</p>
+    </div>
+    <a class="btn btn-danger" href="{% url 'deleteEvent' event.id %}"> Delete</a>
+
+    <a class="btn btn-warning" href="{% url 'updateEvent' event.id %}"> Update</a>
+  </div>
+
+
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+
+
+
+
+
+{% block content %}
+
+
+
+
+
+<div class="container mx-auto p-2">
+
+    <form action="{% url 'addEvent' %}" method="post"   enctype="multipart/form-data">
+
+        {% csrf_token %}
+        {{form.as_p}}
+
+
+        <input type="submit" value="Save" class="btn btn-primary">
+    </form>
+
+
+</div>
+
+{% endblock %}
