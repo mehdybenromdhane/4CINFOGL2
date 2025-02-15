@@ -15,12 +15,26 @@
     <div class="card-body">
       <h5 class="card-title">{{event.title}}</h5>
       <p class="card-text">{{event.description}}</p>
-    </div>
-    <a class="btn btn-danger" href="{% url 'deleteEvent' event.id %}"> Delete</a>
 
-    <a class="btn btn-warning" href="{% url 'updateEvent' event.id %}"> Update</a>
+      <a class="btn btn-danger" href="{% url 'deleteEvent' event.id %}"> Delete</a>
+
+      <a class="btn btn-warning" href="{% url 'updateEvent' event.id %}"> Update</a>
+
+
+
+      {% if button %}
+      <a class="btn btn-dark    " href="{% url 'cancel' event.id %}"> cancel</a>
+{% else %}
+      <a class="btn btn-info   " href="{% url 'participer' event.id %}"> participer</a>
+
+{% endif %}
+      <!-- <a class="btn btn-info {% if button %} disabled  {% endif %}  " href="{% url 'participer' event.id %}"> participer</a>
+      <a class="btn btn-dark {% if button == False %} disabled  {% endif %} " href="{% url 'cancel' event.id %}"> cancel</a> -->
+
+    </div>
+    </div>
+   
   </div>
 
-
-</div>
+ 
 {% endblock %}

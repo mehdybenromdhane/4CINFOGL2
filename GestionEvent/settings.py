@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Person',
-    'Event'
+    'Event',
+    'rest_framework',
+
 ]
 
 MIDDLEWARE = [
@@ -133,4 +135,8 @@ AUTH_USER_MODEL="Person.Person"
 MEDIA_ROOT ='media'
 
 MEDIA_URL='/media/'
+
+ 
+
+LOGOUT_REDIRECT_URL = "/"
 

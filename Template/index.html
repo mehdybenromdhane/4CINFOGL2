@@ -21,7 +21,7 @@
           <a class="navbar-brand" href="#">Gestion Events</a>
 
 
-          {{user}}
+       
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -32,12 +32,28 @@
               </li>
             
               
+
+              {% if user.is_authenticated %}
               <li class="nav-item">
                 <a class="nav-link " href="{% url 'addEvent' %}">add event</a>
               </li>
+
+              {% endif %}
             </ul>
         
           </div>
+
+          {% if user.is_authenticated %}
+
+          <p class="mx-2">welcome <strong>     {{user}}</strong></p>
+          <a href="{% url 'logout' %}" class="btn btn-danger"> Logout</a>
+
+
+          {% else %}
+          <a href="{% url 'register' %}" class="btn btn-primary"> register</a>
+          <a href="{% url 'login' %}" class="btn btn-success mx-2"> Login</a>
+{% endif %}
+     
         </div>
       </nav>
 

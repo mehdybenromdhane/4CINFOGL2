@@ -17,7 +17,13 @@
 
       <h5 class="card-title">{{e.title}}</h5>
       <p class="card-text">{{e.description}}</p>
-      <a href="{% url 'detailsClass' e.id %}" class="btn btn-primary">Details</a>
+
+      <p class="card-text"> Number of participants : <strong>{{e.nbr_participants}}</strong> </p>
+
+      <a href="{% url 'detailsE' e.id %}" class="btn btn-primary">Details</a>
+
+      <a href="{% url 'delete' e.id %}" class="btn btn-danger">Delete</a>
+
     </div>
   </div>
 

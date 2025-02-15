@@ -5,7 +5,11 @@ from django.views.generic import *
 # Create your views here.
 from .forms import EventForm
 
-from .models import Event
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+from Person.models import Person
+from .models import *
 from django.urls import reverse_lazy
 
 def listEvent(request):
@@ -14,10 +18,24 @@ def listEvent(request):
 
 
 
-
+@login_required
 def detailsEvent(request , ide):
-    event = Event.objects.get(id=ide)
-    return render(request,'events/details.html', {"event":event })
+    event1 = Event.objects.get(id=ide)
+    
+    btn= False
+    
+    participant = Participants.objects.filter(person=request.user, event=event1)
+    
+    
+    print(participant)
+    if participant:
+        btn =True
+        
+    else:
+        btn=False
+    
+    
+    return render(request,'events/details.html', {"event":event1 , "button":btn })
 
 
 
@@ -54,7 +72,7 @@ def addEvent(request):
 
 
 
-class Add(CreateView):
+class Add(LoginRequiredMixin,CreateView):
     model=Event
     template_name="events/add.html"
     form_class= EventForm
@@ -77,3 +95,49 @@ class Delete(DeleteView):
     success_url= reverse_lazy("list")
     
     template_name="events/delete.html"
+    
+    
+
+
+def deleteEvent(request,idEvent):
+    
+    event = Event.objects.get(id=idEvent)
+    
+    if event:
+        event.delete()
+        return redirect('list')
+
+
+
+
+def participer (request ,ide):
+    
+    e1 = Event.objects.get(id=ide)
+    
+    p1 = request.user
+    
+    participant = Participants.objects.create(person=p1 , event=e1)
+    
+    if participant:
+        participant.save()
+        
+        e1.nbr_participants+=1
+        e1.save()
+        return redirect("list")
+    
+
+def cancel (request ,ide):
+    
+    e1 = Event.objects.get(id=ide)
+    
+    p1 = request.user
+    
+    participant = Participants.objects.filter(person=p1 , event= e1)
+    
+    if participant:
+        participant.delete()
+        
+        e1.nbr_participants-=1
+        e1.save()
+        return redirect("list")
+    
